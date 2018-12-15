@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<nav class="top-space-30px" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'blog:blog_list' %}">Contas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Confirmação de Email</li>
+    </ol>
+</nav><div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+{% if error_message %}
+<small class="text-muted">{{error_message}}</small>
+{% endif %}
+{% if user.is_authenticated %}
+<p>Olá {{user.username}}</p>
+<p>Enviamos um email para {{user.email}} com uma senha de confirmação de email que deverá ser colcado no formulário abaixo.</p>
+<p>Após ter recebido o email e ter colocado a senha, click em confirmar para confimar o seu endereço de email.</p>
+<p>Se ainda não recebeu o email, por favor, espere por pelo menos 5 minutos.</p>
+<p>Se mesmo depois de 5 minutos você ainda não recebeu o email, <a href="{% url 'accounts:email_confirm_fail' %}">clique qui</a></p>
+<form action='{% url 'accounts:number_token_form' %}' method='POST'>
+	{% csrf_token %}
+	<label for='token'>Senha de Confirmação</label>
+	<input type="hidden" name="id" value="{{user.id}}">
+	<input type="text" class="form-control" name="token">
+	<input class="btn btn-primary" type="submit" value="Confirmar">
+</form>
+{% endif %}
+</div>
+</div>
+{% endblock %}

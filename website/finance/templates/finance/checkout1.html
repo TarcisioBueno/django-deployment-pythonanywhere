@@ -1,0 +1,178 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+<style type="text/css">
+	.margin-bottom{
+		margin-bottom: 20px;
+	}
+  .bold{
+    font-weight: bold;
+  }
+  .site-color{
+    color:#339af0;
+  }
+  .border-top{
+    border-top:solid 1px #339af0;
+  }
+  .shadow:hover {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+  }
+
+</style>
+
+<!--breadcrumb-->
+    <nav  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>            
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'finance:check_prices' %}">Produtos e Preços</a></li>
+            <li class="breadcrumb-item">Pagamento</li>
+        </ol>
+    </nav>
+
+<div class="container">
+<!--Fazer incrição para que seja possível selecionar horário-->
+
+{% if user.is_active %}
+
+
+<div class="row">
+
+<div class="col-md-4 col-lg-4">
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 4 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 200 </span></h1>
+                        
+                        
+          </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 8 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 380 </span></h1>                        
+            </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 12 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 570 </span></h1>                        
+            </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Opções personalizadas</h4>
+          </div>
+          <div class="card-body">
+             <small > Para mais aulas por mês ou alguma quantidade diferente de aulas, escreva quais são suas necessidades no espaço ao lado, abaixo do professor escolhido. Enviaremos um e-mail logo em seguida.</small>                      
+            </div>
+        </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-8 col-lg-8">
+
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Professores e Horários:</h1>
+    <p class="lead">Escreva os melhores horários para você ter aulas no campo abaixo do professor escolhido. Exemplo: Terças e Quintas - Noite.</p>
+    <p class="lead">Enviaremos um email para marcarmos a aula experimental e aulas seguintes, além das opções de pagamento.</p>
+    <p class="lead">Prefere nos contatar por whatsapp? Mande uma mensagem para (19) 984186413.</p>
+  </div>
+</div>
+{% for teacher in teachers %}
+           <div class="card">
+                    <div class="card-header">
+                              <small class="bold-text text-muted">{{teacher.name}}</small>
+                    </div>
+                    <div class="row">
+                          <div class="padding-4px text-center col-lg-2 card-body">
+                              <small class="bold-text text-muted"><p class="card-text">{{post.author.name}}</p></small>
+                              <img src="{{teacher.img}}" width="80" height="80" alt="Imagem do Autor" class="rounded-circle">
+                          </div>
+                          <div class="top-paddin-5px col-lg-10">
+                                <small class="text-muted">{{teacher.description}} </small>
+                          </div>
+                    </div>
+                
+
+                
+                
+
+
+            <form action="{% url 'finance:checkout1' 1 %}" method="POST">{% csrf_token %}
+
+                                      
+                           <input type="hidden" name="teacher_id" value="{{teacher.id}}">
+                           <input type="hidden" name="timeday1" value="{{time.day}}">
+                         
+                           <div class="form-group">
+                              <label for="exampleFormControlTextarea1">Escreva os seus horários disponíveis e clique em enviar mensagem.</label>
+                              <textarea class="form-control"  name="time_selected1" id="hour" rows="3"></textarea>
+                          </div>
+                                             
+                            
+          
+            <input class="btn btn-primary" type="submit" value="Enviar mensagem">
+            </form>
+             
+            
+              </div>
+
+{% endfor %}
+ </div>
+
+
+
+
+<!--Botão de pagamento-->
+
+ 
+
+
+
+
+
+{% else %}
+
+
+
+  <div class="card-body">
+    <div class="margin-bottom text-center">
+        <h5 class="card-title">Informações do Estudante</h5>
+         <p class="card-text">Faça um cadastro no nosso site, assim você poderá escolher o horário da aula experimental e efetuar pagamentos.</p>
+    
+    </div>
+      <div>{% include 'registration/create_user_form.html' %}</div>
+  	 
+  </div>
+  {% endif %}
+
+</div>
+</div>
+</div>
+
+{% endblock %}

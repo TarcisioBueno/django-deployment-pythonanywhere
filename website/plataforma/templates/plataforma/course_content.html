@@ -1,0 +1,64 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+	
+	.black-color{
+		color:black;
+	}
+	.bold{
+		font-weight: bold;
+	}
+  .left-margin{
+    margin-left: 5px;
+  }
+</style>
+
+ <nav aria-label="breadcrumb">
+  
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plataforma:plataforma_index' %}">Plataforma</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'plataforma:plataforma_index' %}">Cursos Zero To Hero English</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{course.course_title|title}}</li>
+        </ol>
+  
+ </nav>
+ <div class="container">
+<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+    		<h1 class="display-4">{{course.course_title}}</h1>
+    	</div>
+</div>
+
+{% for category in course.category_set.all %}
+
+<div>
+  <div class="card">
+    <div data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapseOne" class="" id="headingOne">
+       <h5 class="mb-{{forloop.counter}}">
+        <img class="left-margin" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapseOne" src="{% static 'plataforma/images/list.svg' %}"/>
+        <button class="bold black-color btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapseOne">
+          {{category.category_number}}.<span class="left-margin">{{category.category_title|title}}</span>
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{forloop.counter}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      {% for topic in category.topic_set.all %}
+      <div class="border card-body">        
+		{{category.category_number}}.{{forloop.counter}} - <a class="black-color" href="{% url 'plataforma:topic_content' course.link topic.id topic.link %}">{{topic.topic_title|title}}</a>		
+      </div>
+      {% endfor %}
+    </div>
+  </div>  
+</div>	
+	
+{% empty %}
+<p>Estamos trabalhando nisso e logo teremos conteúdo nessa página.</p>
+{% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'blog:blog_list' %}">Contas</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Entrar</li>
+    </ol>
+</nav>
+
+<div class="container">
+
+{% if error_message %}
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+<small class="text-muted">{{error_message}}</small>
+<p><small class="text-muted">Tente novamente por favor</small></p>
+<form action="{% url 'accounts:login_user' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" name="username" class="form-control" placeholder="Username aqui">
+  </div>
+  <div class="form-group">
+    <label for="password">Senha</label>
+    <input type="password" name="password" class="form-control" placeholder="Senha aqui">
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
+  <small class="text-muted">Esqueceu a senha?<a href="{% url 'password_reset' %}"> Clique aqui!</a></small>
+  <small class="text-muted">Ainda não possui uma conta?<a href="{% url 'accounts:create_user' %}"> Clique aqui!</a></small>
+</form>
+</div>
+
+</div>
+
+{% elif user.is_active %}
+
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Aviso</h5>
+    <p class="card-text">Você já está logado ou não tem permissões para entrar nessa página!</p>
+    <a class="btn btn-primary" href="{% url 'blog:blog_list' %}">Clique aqui para ir ao blog</a>
+  </div>
+</div>
+
+
+
+{% else %}
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+<form action="{% url 'accounts:login_user' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" name="username" class="form-control" placeholder="Username aqui">
+  </div>
+  <div class="form-group">
+    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+    <label for="password">Senha</label>
+    <input type="password" name="password" class="form-control" placeholder="Senha aqui">
+  </div>
+  <button type="submit" class="btn btn-primary">Entrar</button>
+  <small class="text-muted">Esqueceu a senha?<a href="{% url 'password_reset' %}"> Clique aqui!</a></small>
+  <small class="text-muted">Ainda não possui uma conta?<a href="{% url 'accounts:create_user' %}"> Clique aqui!</a></small>
+</form>
+
+
+</div>
+</div>
+{% endif %}
+
+</div>
+
+
+
+                    
+
+
+{% endblock %}

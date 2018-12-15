@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<nav  aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item">Contas</li>
+        <li class="breadcrumb-item active" aria-current="page">Criar Conta</li>
+        <li class="breadcrumb-item active" aria-current="page">Email Confirmado</li>
+    </ol>
+</nav>
+
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+{% if user.is_authenticated %}
+<p>O seu email foi confirmado com sucesso.</p>
+<p>Muito obrigado {{user.username}} </p>
+{% endif %}
+</div>
+</div>
+{% endblock %}

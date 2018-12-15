@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+
+
+ <nav class="" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'blog:blog_list' %}">Plataforma</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Cursos</li>
+        </ol>
+ </nav>
+<div class="container">
+<div class="row">
+{% for course in courses %}
+<div class="card" style="width: 18rem;margin-left: 20px;">
+  <img class="card-img-top" src="{{course.image}}" alt="{{course.course_title}}">
+  <div class="card-body">
+    <h5 class="card-title">{{course.course_title|title}}</h5>
+    <p class="card-text">{{course.status|title}}</p>
+    <a href="{% url 'plataforma:course_content' course.id course.link %}" class="btn btn-primary">Ir para o curso</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

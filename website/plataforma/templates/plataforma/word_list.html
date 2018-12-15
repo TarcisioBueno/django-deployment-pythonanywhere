@@ -1,0 +1,45 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+ <nav class="" aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plataforma:plataforma_index' %}">Plataforma</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lista de palavras</li>
+           </ol>
+ </nav>
+
+
+<div class="container">
+
+	<div class="jumbotron jumbotron-fluid">
+  		<div class="container">
+    		<h1 class="display-4">Lista de Palavras</h1>
+    		<p class="lead">Estude um grupo de palavras por dia. Faça frases, textos, use em seus vídeos, etc. Isso vai te ajudar muito a aprender inglês.</p>
+    	</div>
+</div>
+{% for word_list in word_lists%}
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapseOne">
+          {{word_list.list_name|safe}} - {{word_list.list_date}}
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{forloop.counter}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        {{word_list.list_content|safe}}
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+{% endfor %}
+
+</div>
+{% endblock %}

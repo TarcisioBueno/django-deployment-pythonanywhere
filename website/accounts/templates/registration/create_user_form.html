@@ -1,0 +1,60 @@
+
+
+{% if error_message %}
+  <div class="row">
+  <div class="col-lg-2"></div>
+  <div class="col-lg-8">
+  <p><small class="text-muted">{{error_message}}</small></p>
+  <p><small class="text-muted">Tente mais uma vez por favor</small></p>
+  <form action="{% url 'accounts:create_user' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input class="form-control"  type="text" name="username" required>
+    <label for="email">Email</label>
+    <input type="email" name="email" class="form-control" placeholder="exemplo@exemplo.com"  required>
+    <small class="text-muted">Por favor coloque um email que você tenha acesso pois faremos a confirmação dele logo em seguida.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="">Senha</label>
+    <input type="password" name="password1" class="form-control" placeholder="Senha"  required>
+  </div>
+  <div class="form-group">
+    <label for="">Confirmação de Senha</label>
+    <input type="password" name="password2" class="form-control" placeholder="Senha" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+</div>
+</div>
+{% elif user.is_authenticated %}
+<small class="text-muted">Olá {{user.username}}, você já está cadastrado.</small>
+<a href="{% url 'blog:blog_list' %}">Ir para o blog</a>
+{% else %}
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+<form action="{% url 'accounts:create_user' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input class="form-control"  type="text" name="username" required>
+    <label for="email">Email</label>
+    <input type="email" name="email" class="form-control" placeholder="exemplo@exemplo.com"  required>
+    <small class="text-muted">Por favor coloque um email que você tenha acesso pois faremos a confirmação dele logo em seguida.</small>
+  </div>
+
+  <div class="form-group">
+    <label for="">Senha</label>
+    <input type="password" name="password1" class="form-control" placeholder="Senha"  required>
+  </div>
+  <div class="form-group">
+    <label for="">Confirmação de Senha</label>
+    <input type="password" name="password2" class="form-control" placeholder="Senha" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+</div>
+{% endif %}
+

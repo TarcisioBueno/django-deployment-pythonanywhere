@@ -1,0 +1,62 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+ <nav class="" aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plataforma:plataforma_index' %}">Plataforma</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'plataforma:course_content' topic.category.course.id topic.category.course.link %}">{{topic.category.course.course_title|title}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{topic.topic_title|title}}</li>
+        </ol>
+ </nav>
+
+<div class="container">
+
+
+
+<h1>{{topic.topic_title|title}}</h1>
+<p>{{topic.content|safe}}</p>
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Dúvidas, perguntas ou comentários?</h5>
+        <p class="card-text">Comente abaixo.</p>
+        <a href="#disqus_thread" class="btn btn-primary">Comentar</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Teste o seu conhecimento no assunto.</h5>
+        <p class="card-text">Click no botão abaixo para ir ao questionário.</p>
+        <a href="{% url 'plataforma:quiz' topic.id topic.link %}" class="btn btn-primary">Ir para o questionário</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://zerotoheroenglish.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+{% endblock %}

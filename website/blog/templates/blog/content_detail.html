@@ -1,0 +1,150 @@
+
+
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}{{post.title|title}}{% endblock %}
+{% block extra_head_content %}
+<meta name="description" content="{{post.thumbnail_post}}"/>
+<meta name="keywords" content="{{post.keywords}}"/>
+<meta name="author" content="{{post.author}}"/>
+
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript">
+  function revealForm(forloop_id){
+    document.getElementById("subcommentForm"+forloop_id).style.display = "block";
+    document.getElementById("answerbutton"+forloop_id).style.display="none";
+  }
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v3.1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<style type="text/css">
+   .bottom-margin{
+          margin-bottom: 20px;
+      }
+
+  
+</style>
+
+<!--breadcrumb-->
+    <nav  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'blog:blog_list' %}">Blog</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{post.title|title}}</li>
+        </ol>
+    </nav>
+
+<div class="">
+
+
+
+<div class="container">
+
+<div class="row">
+<!--Post detail-->
+<div class="col-sm-12 col-md-9 col-lg-9">
+      <h1>{{post.title|title}}</h1>
+      <small class="text-muted">{{post.pub_date}} by  {{post.author}}</small>
+
+      <div class="top-space-30px text-justify">
+      <p>{{post.content|safe}}</p>
+      </div>
+<!--Author details-->
+                <div class="card">
+                    <div class="card-header">
+                              <small class="bold-text text-muted">Autor</small>
+                    </div>
+                    <div class="row">
+                          <div class="padding-4px text-center col-lg-2 card-body">
+                              <small class="bold-text text-muted"><p class="card-text">{{post.author.name}}</p></small>
+                              <img src="{{post.author.img}}" width="80" height="80" alt="Imagem do Autor" class="rounded-circle">
+                          </div>
+                          <div class="top-paddin-5px col-lg-10">
+                                <small class="text-muted">{{post.author.description}} </small>
+                          </div>
+                    </div>
+
+                </div>
+
+<!-- Comments Form -->
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://zerotoheroenglish.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+     
+<!--Side posts indication-->
+<div class="col-sm-12 col-md-3 col-lg-3">
+
+  <form class="bottom-margin" action="{% url 'blog:content_detail' post.id post.seo_url_do_post %}" method="POST">
+         {% csrf_token %}
+  <div class="form-group">
+    <h3>Gostaria de receber posts em seu email? Increva-se.</h3>
+    <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">Não compartilharemos o seu email com ninguém.</small>
+  </div>
+    <button type="submit" class="btn btn-primary">Salvar Email na Lista</button>
+</form>
+
+<!--facebook plugin page-->  <div class="fb-page" data-href="https://www.facebook.com/Zero-to-Hero-English-240962006631552/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Zero-to-Hero-English-240962006631552/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Zero-to-Hero-English-240962006631552/">Zero to Hero English</a></blockquote></div>
+
+  <h4 class="top-margin-space-20px text-center">Artigos Populares</h4>
+  {% for indPost in popular_posts reversed %}
+      {% if indPost.id == post.id %}
+      {% else %}
+      {% if forloop.counter <= 4 %}
+      <div class="top-margin-space-20px content-box card">
+          <div class="card-body">
+            <a href="{% url 'blog:content_detail' indPost.id indPost.seo_url_do_post %}"><h5 class="card-title">{{indPost.title|title|truncatewords:8}}</h5></a>
+            <p class="card-text"><small class="text-muted"></small></p>
+          </div>
+          <img class="card-img-bottom" src="{{indPost.img_post}}" alt="{{indPost.title}}">
+      </div>
+      {% endif %}
+      {% endif %}
+      
+    {% endfor %}
+</div>
+</div>
+
+
+
+
+
+
+
+<!--Container Div end-->
+</div>
+
+
+{% endblock %}

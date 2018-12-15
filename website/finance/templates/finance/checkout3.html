@@ -1,0 +1,199 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+<style type="text/css">
+	.margin-bottom{
+		margin-bottom: 20px;
+      .margin-bottom{
+    margin-bottom: 20px;
+  }
+  .bold{
+    font-weight: bold;
+  }
+  .site-color{
+    color:#339af0;
+  }
+  .border-top{
+    border-top:solid 1px #339af0;
+  }
+  .shadow:hover {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+  }
+	}
+
+</style>
+<!--breadcrumb-->
+    <nav  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>            
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'finance:check_prices' %}">Produtos e Preços</a></li>
+            <li class="breadcrumb-item">Pagamento</li>
+        </ol>
+    </nav>
+<div class="container">
+<div class="container">
+<!-- receber professores e listar nomes e horários -->
+{% if message %}
+
+<div class="row"> 
+
+  <div class="col-md-4 col-lg-4">
+    
+<div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Assinante Zero To Hero Englishs</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color">R$ 99,99</span> <small class="text-muted">/ mês</small></h1>
+            
+            <ul class="list-unstyled mt-3 mb-4">
+              <small ><li class="border-top">Acesso aos podcasts semanais com scripts</li></small>
+              <small > <li class="border-top">Materiais lançados semanalmente com exercícios</li></small>
+              <small ><li class="border-top">Acesso a plataforma</li></small>
+              <small > <li class="border-top">Acesso as aulas semanais</li></small>
+              <small > <li class="border-top">Materiais necessários: Grátis</li></small>
+              <small > <li class="border-top">Fórum de dúvidas</li></small>
+              <small > <li class="border-top">Uma aula particular por mês - 50 minutos</li></small>
+              <small > <li class="border-top"><li>Curso do básico ao intermediário/avançado</li></small>
+              <small > <li class="border-top"><li>Duração de 6 meses - Todo o material fica disponível 24h por dia</li></small>
+            </ul>          
+
+
+  </div>
+</div>
+</div>
+<div class="col-md-8 col-lg-8">
+<div class="card">
+  <div class="card-header">
+    Pagamento
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Olá {{user.username}}</h5>
+    <p class="card-text">{{course}}</p>
+    <p class="card-text">Para obter a sua assinatura click no botão abaixo.</p>
+    
+    
+                    
+<a mp-mode="dftl" href="http://mpago.la/R3E7" name="MP-payButton" class='lightBlue-ar-l-rn-undefined'>Assinar</a>
+<script type="text/javascript">
+    (function() {
+        function $MPC_load() {
+            window.$MPC_loaded !== true && (function() {
+                var s = document.createElement("script");
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+                window.$MPC_loaded = true;
+            })();
+        }
+        window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+    })();
+</script>
+
+                
+   
+                    
+
+
+                
+
+  </div>
+</div>
+</div>
+
+
+ {% else %}
+
+<div class="row">
+  <div class="col-md-4 col-lg-4">
+    
+<div class="shadow card mb-4 box-shadow">
+          <div class="card-header">            <h4 class="my-0 font-weight-normal">Estudante Zero To Hero English</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 49,99</span> <small class="text-muted">/ mês</small></h1>
+             
+            <ul class="list-unstyled mt-3 mb-4">
+              <small ><li class="border-top">Acesso aos podcasts semanais com scripts</li></small>
+              <small > <li class="border-top">Materiais lançados semanalmente</li></small>
+              <small ><li class="border-top">Acesso a plataforma</li></small>
+              <small ><li class="border-top">Fórum de dúvidas</li></small>              
+            </ul>
+            <h5>Você não terá:</h5>
+            <ul class="list-unstyled mt-3 mb-4">
+              <small class="risk text-muted"><li class="border-top"><strike>Acesso as aulas semanais</strike></li></small>
+              <small class="risk text-muted"> <li class="border-top"><strike>Uma aula particular por mês - 50 minutos</strike></li></small>
+                           
+            </ul>
+
+
+
+           
+          </div>
+        </div>
+
+    
+  </div>
+  <div class="ol-md-8 col-lg-8">
+
+<div class="card">
+  <div class="card-header">
+    Pagamento
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Olá {{user.username}}</h5>
+    <p class="card-text">{{course}}</p>
+    <p class="card-text">Para obter a sua assinatura click no botão abaixo.</p>
+    
+    
+                    
+<a mp-mode="dftl" href="http://mpago.la/85QD" name="MP-payButton" class='lightBlue-ar-l-rn-undefined'>Assinar</a>
+<script type="text/javascript">
+    (function() {
+        function $MPC_load() {
+            window.$MPC_loaded !== true && (function() {
+                var s = document.createElement("script");
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                var x = document.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+                window.$MPC_loaded = true;
+            })();
+        }
+        window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+    })();
+</script>
+
+                
+   
+                    
+
+
+                
+
+  </div>
+
+   </div>
+   </div>
+   </div>
+
+
+
+
+
+
+
+
+
+
+<!--Botão de pagamento-->
+  {% endif %}
+ 
+
+{% endblock %}

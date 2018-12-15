@@ -1,0 +1,97 @@
+{% extends 'blog/base.html' %}
+{% block title %}Blog Zero To Hero English{% endblock %}
+{% block content %}
+  <style>
+    .top-container{
+      position: relative;
+      top:50px;
+
+    }
+    .content-list{
+      position:relative;
+      top:80px;
+
+    }
+    .titulo-blog-azul{
+      color:#007bff;
+    }
+      .content-box{
+          margin-bottom: 15px;
+          border:1px solid #cecece;
+      }
+     
+  
+
+  </style>
+
+
+
+    <!--breadcrumb-->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'blog:blog_list' %}">Blog</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Posts</li>
+        </ol>
+    </nav>
+<div class="top-container container">
+  <h1 class="text-center">Blog <span class="titulo-blog-azul">Zero</span> To <span class="titulo-blog-azul">Hero</span> English</h1>
+  <p class="text-center lead">Materiais, técnicas e dicas de estudo</p>
+</div>
+
+
+<div class="content-list">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-8">
+      {% for post in posts %}
+          <div class="content-box card">
+              <img class="img-fluid" src="{{post.img_post}}"alt="{{post.title}}">
+              <div class="card-body">
+                  <a href="{% url 'blog:content_detail' post.id post.seo_url_do_post %}"><h5 class="card-title">{{post.title|title}}</h5></a>
+                  <p class="card-text"> {{post.thumbnail_post}}</p>
+                  <p class="card-text"><small class="text-muted">{{post.author}} {{post.pub_date}}</small></p>
+              </div>
+          </div>
+          {% empty %}
+
+          <p>Ainda não há posts</p>
+
+        {% endfor %}
+    </div>
+
+    <div class="col-sm-12 col-md-12 col-lg-4">
+
+
+      
+
+
+
+      {% for post in posts reversed %}
+          <div class="content-box card">
+              <div class="card-body">
+                <a href="{% url 'blog:content_detail' post.id post.seo_url_do_post %}"><h5 class="card-title">{{post.title|title}}</h5></a>
+                <p class="card-text">{{post.thumbnail_post|truncatewords:10}}</p>
+                <p class="card-text"><small class="text-muted"></small></p>
+              </div>
+              <img class="card-img-bottom" src="{{post.img_post}}" alt="{{post.title}}">
+          </div>
+        {% endfor %}
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

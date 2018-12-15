@@ -1,0 +1,149 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+<style type="text/css">
+  
+.top-margin{
+  margin-top: 50px;
+}
+.site-color{
+    color:#339af0;
+  }
+.index-intro{
+  width:100%;
+  background-color: #f3f3f3;
+}
+.index-intro .jumbotron{
+  padding: 100px 6px;
+  margin:0px;
+
+}
+
+</style>
+
+
+
+    <main role="main">
+     <!-- 
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">        
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'blog/images/banner.jpg' %}" width="1350" height="482" alt="First slide">
+            <div class="container">              
+              <div class="carousel-caption text-left ">
+                <div class="col-lg-7 text-center">
+                <p><img class="first-slide" src="{% static 'blog/images/logo.png' %}" width="126" height="48" alt="First slide"></p>
+                </div>
+                <h3>Aprenda Inglês Online</h3>
+                <p>A Zero To Hero English deixa o seu aprendizado<br>de inglês mais rápido e eficiente.<br>
+                Tenha acesso a podcasts em inglês com scripts, professores <br> particulares, vídeos explicativos e muito mais.</p>
+                <p><a class="btn btn-lg btn-warning" href="#prices" role="button">Inscreva-se</a></p>
+              </div>
+            </div>
+          </div>          
+        </div>        
+      </div>
+-->
+
+<article class="index-intro">
+<div class="container">
+  <div class="jumbotron">
+    
+   
+
+
+    <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form>
+              <div class="form-row">
+                <div class="col-12 col-md-9 mb-2 mb-md-0">
+                  <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+                </div>
+                <div class="col-12 col-md-3">
+                  <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
+
+
+
+
+
+</div>
+</article>
+
+
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container marketing">
+        
+
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Podcasts em inglês <span style="color:#007bff;">com scripts.</span></h2>
+            <p class="lead">Tenha podcasts semanais para que você possa praticar a escuta do inglês, você também terá textos explicativos e exercícios sobre tudo que ouviu para máximo aproveitamento.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" src="{% static 'blog/images/headphones.jpg' %}" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading"> Professores Particulares <span style="color:#007bff;">. Aulas Personalizadas.</span></h2>
+            <p class="lead">Professores com aulas online personalizadas para que você seja atendido por nós com aquilo que realmente precisa.</p>
+          </div>
+          <div class="col-md-5 order-md-1">
+            <img class="featurette-image img-fluid mx-auto" src="{% static 'blog/images/laptop.jpg' %}" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+          <div class="col-md-7">
+            <h2 class="featurette-heading">Plataforma de estudos. <span style="color:#007bff;">24 horas por dia.</span></h2>
+            <p class="lead">Na plataforma Zero To Hero English você terá vídeos explicativos, lista de exercícios, espaço para tirar todas as suas dúvidas e correção dos seus textos e vídeos em inglês.</p>
+          </div>
+          <div class="col-md-5">
+            <img class="featurette-image img-fluid mx-auto" src="{% static 'blog/images/videos.png' %}" alt="Generic placeholder image">
+          </div>
+        </div>
+
+        <div class="top-margin" id="prices">
+
+       {% include 'finance/price_base.html' %}
+
+       </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+      </div><!-- /.container -->
+
+
+      <!-- FOOTER -->
+      <footer class="container">
+        <p class="float-right"><a href="#">Ir para o topo</a></p>
+        <p>&copy; 2018 Zero To Hero English</p>
+      </footer>
+    </main>
+{% endblock %}

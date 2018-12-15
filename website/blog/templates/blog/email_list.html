@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+ <nav  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'blog:blog_list' %}">Blog</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lista de emails</li>
+        </ol>
+    </nav>
+
+<div class="container">
+
+  {% if user.is_staff %}
+ <p>
+  {% for email in emails %}
+    {{email}};
+  {% endfor %}
+</p>
+
+{% else %}
+
+<p>Você não tem permissões para acessar essa página.</p>
+  {% endif %}
+</div>
+
+{% endblock %}

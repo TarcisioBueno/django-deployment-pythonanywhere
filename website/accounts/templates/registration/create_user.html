@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+<nav  aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item">Contas</li>
+        <li class="breadcrumb-item active" aria-current="page">Criar Conta</li>
+    </ol>
+</nav>
+
+
+{% include 'registration/create_user_form.html' %}
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+<style type="text/css">
+	.margin-bottom{
+		margin-bottom: 20px;
+	}
+    .margin-bottom{
+    margin-bottom: 20px;
+  }
+  .bold{
+    font-weight: bold;
+  }
+  .site-color{
+    color:#339af0;
+  }
+  .border-top{
+    border-top:solid 1px #339af0;
+  }
+  .shadow:hover {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+  }
+
+</style>
+
+
+<!--breadcrumb-->
+    <nav  aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>            
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'finance:check_prices' %}">Produtos e Preços</a></li>
+            <li class="breadcrumb-item">Pagamento</li>
+        </ol>
+    </nav>
+<div class="container">
+
+
+{% if user.is_active %}
+
+ {% if payment %}
+
+ <div class="row">
+<div class="col-md-4 col-lg-4">
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 4 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 200 </span></h1>
+                        
+                        
+          </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 8 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 380 </span></h1>                        
+            </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 12 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 570 </span></h1>                        
+            </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Opções personalizadas</h4>
+          </div>
+          <div class="card-body">
+             <small > Para mais aulas por mês ou alguma quantidade diferente de aulas, escreva quais são suas necessidades no espaço ao lado, abaixo do professor escolhido. Enviaremos um e-mail logo em seguida.</small>                      
+            </div>
+        </div>
+</div>
+
+</div>
+
+<div class="col-md-8 col-lg-8">
+
+
+
+
+<div class="card">
+  <div class="card-header">
+    Pagamento
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Olá {{user.username}}</h5>
+    <p class="card-text">{{message}}</p>
+    <p>Você terá aulas com o professor(a) {{user.profile.teacher}}.</p></p>
+     
+
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+   {% else %}
+
+
+
+<div class="row">
+<div class="col-md-4 col-lg-4">
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 4 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 200 </span></h1>
+                        
+                        
+          </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 8 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 380 </span></h1>                        
+            </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Aulas Particulares - 12 aulas/mês</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title"><span class="site-color" >R$ 570 </span></h1>                        
+            </div>
+        </div>
+</div>
+<div class="card-deck mb-3 text-center">
+        <div class="shadow card mb-4 box-shadow">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Opções personalizadas</h4>
+          </div>
+          <div class="card-body">
+             <small > Para mais aulas por mês ou alguma quantidade diferente de aulas, escreva quais são suas necessidades no espaço ao lado, abaixo do professor escolhido. Enviaremos um e-mail logo em seguida.</small>                      
+            </div>
+        </div>
+</div>
+
+</div>
+
+<div class="col-md-8 col-lg-8">
+<div class="card">
+  <div class="card-header">
+    Pagamento
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Olá {{user.username}}</h5>
+    <p class="card-text">{{message}}</p>
+    <p>Você terá aulas com o professor(a) {{user.profile.teacher}}.</p></p>
+
+
+     
+  </div>
+</div>
+</div>
+
+</div>
+
+{% endif %}
+
+<!--Botão de pagamento-->
+
+ 
+{% else %}
+ <div class="card-body">
+    <div class="margin-bottom text-center">
+    <h5 class="card-title">Informações do Estudante</h5>
+    <p class="card-text">Faça um cadastro no nosso site, assim você poderá escolher o horário da aula experimental e efetuar pagamentos.</p>
+    
+    </div>
+    <div>{% include 'registration/create_user_form.html' %}</div>
+  	 
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

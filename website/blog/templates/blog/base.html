@@ -1,0 +1,178 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>{% block title %}{% endblock %}</title>
+     {% block extra_head_content %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+   <style type="text/css">
+     #white{
+      color:white;
+     }
+
+
+
+
+.countdown {
+  float: left;
+  margin-top: 5px;
+}
+
+.countdown--digit {
+  font-size: 2.5em;
+  font-weight: bold;
+  background-color: #ffda00;
+  padding: 5px;
+  width: 80px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 4px;
+  margin: 5px 3px 0 0;
+}
+
+.countdown--unit {
+  font-size: 0.37em;
+  font-weight: 100;
+  color: #ffffff;
+  background-color: #000000;
+}
+    
+   </style>
+
+    </head>
+  <body>
+   
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+              <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'blog/images/logo1.png' %}" width="126" height="48" alt="">               
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="move-right navbar-nav mr-auto">
+                      <li class="nav-item">
+                        <a id="white" class="nav-link " href="{% url 'index' %}">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a  id="white" class="nav-link" href="{% url 'blog:blog_list' %}">Blog</a>
+                      </li>
+                      <li class="nav-item">
+                        <a  id="white" class="nav-link" href="{% url 'plataforma:plataforma_index' %}">Plataforma</a>
+                      </li>                      
+                  </ul>
+                  <ul class="navbar-nav ml-auto">
+
+                  {% if user.is_authenticated %}
+
+                      
+
+                      <li class="nav-item">
+                        <a  id="white" class="nav-link">Olá {{user.username}}</a>
+                      </li>
+
+                      {% if user.is_staff %}
+
+                      <li class="nav-item">
+                        <a  href="{% url 'blog:email_list' %}"  id="white" class="nav-link">Lista de emails</a>
+                      </li>
+
+                      {% endif %}
+
+                      <li class="nav-item">
+                        <a href="{% url 'plataforma:user_page' %}" id="white" class="nav-link">Meu Perfil</a>
+                      </li>
+
+                      <li class="nav-item">
+                        <a href="{% url 'plataforma:word_list' %}" id="white" class="nav-link">Palavras do dia</a>
+                      </li>
+                      
+                      <li class="nav-item">
+                        <a  id="white" class="nav-link" href="{% url 'accounts:logout_user' %}">Sair</a>
+                      </li>
+
+                      {% else %}
+                  <form action="{% url 'accounts:login_user' %}"class="form-inline my-2 my-lg-0" method="POST">
+                    {% csrf_token %}
+                      <input class="margin-top form-control mr-sm-2" name="username" type="text" placeholder="Nome de usuário" aria-label="Nome de usuário" required>
+                      <input class="margin-top form-control mr-sm-2" name="password" type="password" placeholder="Senha" aria-label="Nome de usuário" required>
+                      <button  id="white" class="margin-top btn btn-primary"  type="submit">Entrar</button>
+                  </form>
+                  {% endif %}
+              </div>
+            </ul>
+
+      </nav>
+
+
+
+
+        {% block content %}
+        {% endblock %}
+
+
+
+
+    <!--timer -->
+
+    <!-- Include TimeR default stylesheet -->
+<link href="css/default-style.css" rel="stylesheet">
+
+<!-- Create a container for the TimeR to insert into -->
+<div id="TimeR"></div>
+
+<!-- Create a container for the date of the countdown to insert into -->
+<div id="until"></div>
+
+<!-- Include the Moment library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
+
+<!-- Include the TimeR library -->
+<script src="js/TimeR-2.0.1.js"></script>
+
+<!-- Initialize TimeR countDown -->
+<script type="text/javascript">
+  window.addEventListener("load", function() {
+
+    var t = new TimeR({
+      id     : "TimeR",
+      now    : "02/18/2017 8:00:00",
+      end    : "03/17/2017 1:00:00",
+
+      unitNames : {
+        "minutes": "MINS", //End with Plural
+        "seconds": "SECS",
+        "years"  : "YEARS",
+        "days"   : "DAYS",
+        "hours"  : "HOURS"
+      }
+
+    });
+
+    t.countDown();
+
+
+  });
+</script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.js"></script>
+
+    <!-- Bootstrap javascript,jequery etc. -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'blog/js/main.js' %}"></script>
+    {% block javascript %}{% endblock %}
+  </body>
+</html>

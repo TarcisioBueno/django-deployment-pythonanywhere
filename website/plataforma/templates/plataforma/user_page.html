@@ -1,0 +1,49 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+
+ <nav class="" aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plataforma:plataforma_index' %}">Plataforma</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Página do Usuário</li>
+            
+        </ol>
+ </nav>
+
+
+<div class="container">
+
+{% if user.is_active %}
+
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Olá {{user.username}}</h1>
+    <p class="lead">Nessa página você recebe os seus materiais particulares.</p>     
+  </div>
+</div>
+
+
+<div class="card">
+  <div class="card-header">
+    Materiais Particulares
+  </div>
+  <div class="card-body">
+    
+    <p class="card-text">{{user.profile.releases|safe}}</p>
+  
+  </div>
+</div>
+ 
+
+
+{% endif %}
+
+
+</div>
+
+
+
+
+{% endblock %}

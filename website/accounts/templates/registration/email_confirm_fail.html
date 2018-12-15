@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<nav  aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+        <li class="breadcrumb-item">Contas</li>
+        <li class="breadcrumb-item active" aria-current="page">Criar Conta</li>
+        <li class="breadcrumb-item active" aria-current="page">Falha Na Confirmação De Email</li>
+    </ol>
+</nav>
+
+<div class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8">
+{% if user.is_authenticated %}
+	<p>Olá {{user.username}}, se você não recebeu o email com o código de confirmação, por favor mande um email para tarcisio_bueno@outlook.com para que a situação possa ser resolvida.</p>
+	<p>Pedimos desculpas pelo incoveniente, time Zero To Hero English.</p>	
+{% endif %}
+</div>
+</div>
+{% endblock %}

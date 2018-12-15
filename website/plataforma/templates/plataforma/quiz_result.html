@@ -1,0 +1,98 @@
+{% extends 'blog/base.html' %}
+
+
+{% block content %}
+<style type="text/css">	
+  .margin-top{
+    margin-top: 30px; 
+  }
+
+</style>
+
+<nav class="" aria-label="breadcrumb">
+         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a  href="{% url 'index' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'plataforma:plataforma_index' %}">Plataforma</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'plataforma:course_content' topic.category.course.id topic.category.course.link %}">{{topic.category.course.course_title|title}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'plataforma:topic_content' topic.category.course.link topic.id topic.link %}">{{topic.topic_title|title}}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Quiz</li>
+
+        </ol>
+ </nav>
+
+ {% if error_message %}
+
+ {{error_message}}
+
+ {% else %}
+
+
+
+<div class="container">
+
+<div class="card text-center">
+  <div class="card-header">
+    Esses são seus resultados no quiz sobre "{{topic.topic_title}}"
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{message}}</h5>
+    {% if percentage >= 70 %}
+    <p style="color:#339af0;font-weight: bold;" class="card-text">Você acertou {{percentage}} % do teste!</p>
+    {% else %}
+    <p style="color:red;font-weight: bold;" class="card-text">Você acertou {{percentage}} % do teste!</p>
+    {% endif %}
+  </div>
+  
+</div>
+
+<div class="display-none-incorrect margin-top card">
+{% for question in incorrects %}
+{% if forloop.counter == 1 %}
+<h5 class="card-header">Você errou:</h5>
+{% endif %}
+<div class="card">
+  <h5 class="card-header">Questão {{question.question_number}}</h5>
+  <div class="card-body">
+    <p class="card-text">{{question.question_text}}</p> 
+    <p>A resposta correta é: {{question.right_option}}</p>    
+ </div>
+</div>
+{% empty %}
+	<style>
+		.display-none-incorrect{
+			display: none;
+		}
+	</style> 
+{% endfor %}
+</div>
+
+
+  
+
+
+<div class="display-none-correct margin-top card">
+{% for question in corrects %}
+{% if forloop.counter == 1 %}
+<h5 class="card-header">Você acertou:</h5>
+{% endif %}
+<div class="card-background-color card">
+  <h5 class="card-header">Questão {{question.question_number}}</h5>
+  <div class="card-body">
+    <p class="card-text">{{question.question_text}}</p> 
+    <p>A resposta correta é: {{question.right_option}}</p>   
+ </div>
+</div>
+{% empty %}
+	<style>
+		.display-none-correct{
+			display: none;
+		}
+	</style> 
+{% endfor %}
+</div>
+
+</div>
+
+ {% endif %}
+
+{% endblock %}
